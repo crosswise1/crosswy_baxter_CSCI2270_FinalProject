@@ -1,5 +1,5 @@
-#ifndef ELEVATOR_H
-#define ELEVATOR_H
+#ifndef ELEVATORBAY_H
+#define ELEVATORBAY_H
 #include<vector>
 #include<queue>
 #include<iostream>
@@ -19,6 +19,9 @@ class ElevatorBay
     public:
         Elevator();
         ~Elevator();
+        Readfile (char*);
+        void Allocatepeople();
+        void Printresults();
 
     protected:
     private:
