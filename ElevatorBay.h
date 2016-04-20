@@ -29,6 +29,7 @@ class ElevatorBay
         Elevator e1;
         Elevator e2;
         Elevator e3;
+        Elevator e4;
 
 
 
