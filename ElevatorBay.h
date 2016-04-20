@@ -22,6 +22,7 @@ class ElevatorBay
         Readfile (char*);
         void Allocatepeople();
         void Printresults();
+        int nextFloor();
 
     protected:
     private:
