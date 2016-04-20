@@ -10,7 +10,7 @@ struct Person{
 };
 
 struct Elevator{
-    queue<Person> people;
+    queue<Person> passengers;
     int floorsVisited;
 };
 
@@ -22,6 +22,10 @@ class ElevatorBay
 
     protected:
     private:
+        Elevator e1;
+        Elevator e2;
+        Elevator e3;
+
 
 
 };
