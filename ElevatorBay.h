@@ -1,6 +1,7 @@
 #ifndef ELEVATOR_H
 #define ELEVATOR_H
 #include<vector>
+#include<queue>
 #include<iostream>
 
 struct Person{
@@ -8,7 +9,12 @@ struct Person{
     int floor;
 };
 
-class Elevator
+struct Elevator{
+    queue<Person> people;
+    int floorsVisited;
+};
+
+class ElevatorBay
 {
     public:
         Elevator();
@@ -20,4 +26,3 @@ class Elevator
 };
 
 #endif // GRAPH_H
-
