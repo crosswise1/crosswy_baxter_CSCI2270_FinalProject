@@ -12,6 +12,7 @@ struct Person{
 struct Elevator{
     queue<Person> people;
     int floorsVisited;
+    int test;
 };
 
 class ElevatorBay
@@ -22,6 +23,7 @@ class ElevatorBay
 
     protected:
     private:
+
 
 };
 
