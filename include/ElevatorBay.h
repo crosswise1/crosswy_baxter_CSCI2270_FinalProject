@@ -5,7 +5,7 @@
 #include<iostream>
 
 struct Person{
-    string identifier;
+    string id;
     int floor;
 };
 
@@ -19,7 +19,7 @@ class ElevatorBay
     public:
         Elevator();
         ~Elevator();
-        Readfile (char*);
+        void readFile(std::string);
         void Allocatepeople();
         void Printresults();
         int nextFloor(); //new comment that i added
