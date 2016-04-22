@@ -47,6 +47,12 @@ void ElevatorBay::allocatePeople1(){ //This method allocates people for floors 1
             //std::cout << "Name:: " << people[i].id <<", Floor: " << people[i].floor << std::endl;
             e1.passengers.push(people[i]);
         }
+        else if(people[i].floor >= 6 && people[i].floor <= 10){
+            e2.passengers.push(people[i]);
+        }
+        else if(people[i].floor >= 11 && people[i].floor <= 15){
+            e3.passengers.push(people[i]);
+        }
     }
     //Do we need to add a condition if queue is not empty?
     std::cout<<"test" << std::endl;
