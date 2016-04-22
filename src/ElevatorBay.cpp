@@ -56,31 +56,31 @@ void ElevatorBay::allocatePeople1(){ //This method allocates people for floors 1
     }
     //Do we need to add a condition if queue is not empty?
     std::cout<<"test" << std::endl;
-    processPeople(e1);
+    processPeople(e1);  //unsure about what this thing does exactly...
 }
 
 void ElevatorBay::processPeople(Elevator e){
     int x = 0;
-    std::vector <int> tmp;
+    std::vector <int> uniqueFloors;
     while (!e.passengers.empty()){
         //std::cout << e1.passengers.front().id << std::endl;
         int floor = e.passengers.front().floor;
         bool found = false;
-        for (int j  = 0; j <= tmp.size(); j++){
-            if (tmp[j] == floor) {
+        for (int j  = 0; j <= uniqueFloors.size(); j++){
+            if (uniqueFloors[j] == floor) {
                 found = true;
                 break;
             }
         }
         if(!found) {
-            tmp.push_back(floor);
+            uniqueFloors.push_back(floor);
             e.floorsVisited++;
         }
         e.passengers.pop();
         x++;
-        if (x == e.capacity-1){
+        if (x == e.capacity){
             x = 0;
-            tmp.clear();
+            uniqueFloors.clear();
             e.floorsVisited++;
         }
     }
