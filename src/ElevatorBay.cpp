@@ -29,11 +29,30 @@ void ElevatorBay::readFile(std::string fname){
             people.push_back(newPerson);
         }
         printInitial();
+        allocatePeople1();
     }
 }
 
 void ElevatorBay::printInitial(){
-    for(int i = 0; i < people.size(); i++){
-        std::cout << "Name: " << people[i].id << ", Floor: " << people[i].floor << std::endl;
+    for(unsigned int i = 0; i < people.size(); i++){
+        std::cout << "Name: " << people[i].id << " Floor: " << people[i].floor << std::endl;
+    }
+}
+
+void ElevatorBay::allocatePeople1(){ //This method allocates people for floors 1-5
+    std::cout << "================" << std::endl; //this is just error checking
+    for (unsigned int i = 0; i < people.size(); i++){
+        if (people[i].floor >= 1 && people[i].floor <= 5){
+            std::cout << "Name:: " << people[i].id <<", Floor: " << people[i].floor << std::endl;
+            e1.passengers.push(people[i]);
+        }
+    }
+    if (e1.passengers.empty())
+        std::cout<<"queue is empty"<<std::endl;
+    else if (!e1.passengers.empty())
+        std::cout <<"QUEUE is not empty"<<std::endl;
+    //add a condition if queue is not empty?
+    while (!e1.passengers.empty()){
+        std::cout << e1.passengers.front() << std::endl;
     }
 }
