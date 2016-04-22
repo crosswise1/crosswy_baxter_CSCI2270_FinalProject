@@ -22,9 +22,9 @@ void ElevatorBay::readFile(std::string fname){
     if(inFile.good()){
         while(getline(inFile, line)){
             std::stringstream ss(line);
-            getline(ss, name);
-            getline(ss, floorStr);
-            floor = stoi(floorStr);
+            getline(ss, name, ',');
+            getline(ss, floorStr, ',');
+            floor = std::stoi(floorStr);
             Person newPerson(name, floor);
             people.push_back(newPerson);
         }
