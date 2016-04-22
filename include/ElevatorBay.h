@@ -5,20 +5,20 @@
 #include<iostream>
 
 struct Person{
-    string id;
+    std::string id;
     int floor;
 };
 
 struct Elevator{
-    queue<Person> passengers;
+    std::queue<Person> passengers;
     int floorsVisited;
 };
 
 class ElevatorBay
 {
     public:
-        Elevator();
-        ~Elevator();
+        ElevatorBay(std::string);
+        ~ElevatorBay();
         void readFile(std::string);
         void Allocatepeople();
         void Printresults();

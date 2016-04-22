@@ -1,4 +1,4 @@
-#include "ElevatorBay.h"
+#include "../include/ElevatorBay.h"
 #include<queue>
 #include<vector>
 #include<iostream>
@@ -7,11 +7,13 @@
 ElevatorBay::ElevatorBay(std::string fname){
     readFile(fname);
 }
-
+ElevatorBay::~ElevatorBay(){
+    //nothing
+}
 void ElevatorBay::readFile(std::string fname){
-    ifstream inFile;
+    std::ifstream inFile;
     inFile.open(fname);
     if(inFile.good()){
-        
+
     }
 }
