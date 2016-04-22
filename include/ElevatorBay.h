@@ -17,6 +17,11 @@ struct Person{
 struct Elevator{
     std::queue<Person> passengers;
     int floorsVisited;
+    int capacity;
+    Elevator(){
+        floorsVisited = 0;
+        capacity = 8;
+    }
 };
 
 class ElevatorBay
@@ -25,9 +30,12 @@ class ElevatorBay
         ElevatorBay(std::string);
         ~ElevatorBay();
         void readFile(std::string);
-        void allocatePeople();
+        void allocatePeople1();
+        //void allocatePeople2();
+        //void allocatePeople3();
         void printResults();
         int nextFloor();
+        void processPeople (Elevator);
 
     protected:
     private:
@@ -36,9 +44,6 @@ class ElevatorBay
         Elevator e3;
         std::vector<Person> people;
         void printInitial();
-
-
-
 };
 
-#endif // GRAPH_H
+#endif // ELEVATORBAY_H
