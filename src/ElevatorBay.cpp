@@ -44,7 +44,7 @@ void ElevatorBay::allocatePeople1(){ //This method allocates people for floors 1
     std::cout << "================" << std::endl; //this is just error checking
     for (unsigned int i = 0; i < people.size(); i++){
         if (people[i].floor >= 1 && people[i].floor <= 5){
-            //std::cout << "Name:: " << people[i].id <<", Floor: " << people[i].floor << std::endl;
+            std::cout << "Name:: " << people[i].id <<", Floor: " << people[i].floor << std::endl;
             e1.passengers.push(people[i]);
         }
         else if(people[i].floor >= 6 && people[i].floor <= 10){
@@ -62,19 +62,27 @@ void ElevatorBay::allocatePeople1(){ //This method allocates people for floors 1
 void ElevatorBay::processPeople(Elevator e){
     int x = 0;
     std::vector <int> uniqueFloors;
+    //std::cout<<"tmp's size: " << tmp.size() << std::endl;
     while (!e.passengers.empty()){
         //std::cout << e1.passengers.front().id << std::endl;
         int floor = e.passengers.front().floor;
+        std::cout <<"Floor number: " << floor << std::endl;
         bool found = false;
-        for (int j  = 0; j <= uniqueFloors.size(); j++){
-            if (uniqueFloors[j] == floor) {
-                found = true;
-                break;
+        if (!uniqueFloors.empty()){
+            for (unsigned int j  = 0; j <= uniqueFloors.size(); j++){
+                std::cout<<"what is J = " << j << std::endl;
+                if (uniqueFloors[j] == floor) {
+                    found = true;
+                    break;
+                }
             }
         }
+        std::cout<<"5 test" << std::endl;
         if(!found) {
             uniqueFloors.push_back(floor);
+            //std::cout<<"5 test" << std::endl;
             e.floorsVisited++;
+            //std::cout<<"6 test" << std::endl;
         }
         e.passengers.pop();
         x++;
