@@ -94,6 +94,7 @@ void ElevatorBay::processPeopleEfficient(Elevator e){
     }
     if (numPassengers != 0)
         e.floorsVisited++;
+        //new comment
     std::cout<<"floors visited: "<< e.floorsVisited << std::endl;
 
 }
