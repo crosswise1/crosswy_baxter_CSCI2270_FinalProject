@@ -30,7 +30,7 @@ void ElevatorBay::readFile(std::string fname){
             people.push_back(newPerson);
         }
         printInitialStats(); //added print initial stats
-        allocatePeople1();
+        allocatePeopleEfficient(); //changed allocatePeople1 to allocatePeopleEfficient
     }
 }
 
