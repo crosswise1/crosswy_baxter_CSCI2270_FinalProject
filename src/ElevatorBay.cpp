@@ -40,7 +40,7 @@ void ElevatorBay::printInitialStats(){
     }
 }
 
-void ElevatorBay::allocatePeople1(){ //This method allocates people for floors 1-5
+void ElevatorBay::allocatePeopleEfficient(){ //This method allocates people for floors 1-5
     std::cout << "================" << std::endl; //this is just error checking
     for (unsigned int i = 0; i < people.size(); i++){
         if (people[i].floor >= 1 && people[i].floor <= 5){
@@ -60,7 +60,7 @@ void ElevatorBay::allocatePeople1(){ //This method allocates people for floors 1
 }
 
 void ElevatorBay::processPeopleEfficient(Elevator e){
-    int x = 0;
+    int numPassengers = 0;
     std::vector <int> uniqueFloors;
     //std::cout<<"tmp's size: " << tmp.size() << std::endl;
     while (!e.passengers.empty()){
@@ -85,15 +85,31 @@ void ElevatorBay::processPeopleEfficient(Elevator e){
             //std::cout<<"6 test" << std::endl;
         }
         e.passengers.pop();
-        x++;
-        if (x == e.capacity){
-            x = 0;
+        numPassengers++;
+        if (numPassengers == e.capacity){
+            numPassengers = 0;
             uniqueFloors.clear();
             e.floorsVisited++;
         }
     }
-    if (x != 0)
+    if (numPassengers != 0)
         e.floorsVisited++;
     std::cout<<"floors visited: "<< e.floorsVisited << std::endl;
 
+}
+
+
+void ElevatorBay::allocatePeopleInefficient(){
+    for(int i = 0; i < people.size(); i++){
+        ie1.passengers.push(people[i]);
+    }
+    processPeopleInefficient(ie1);
+}
+
+void ElevatorBay::processPeopleInefficient(Elevator e){
+    std::vector<int> uniqueFloors;
+
+    while(!e.passengers.empty()){
+
+    }
 }
