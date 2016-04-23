@@ -34,7 +34,7 @@ void ElevatorBay::readFile(std::string fname){
     }
 }
 
-void ElevatorBay::printInitial(){
+void ElevatorBay::printInitialStats(){
     for(unsigned int i = 0; i < people.size(); i++){
         std::cout << "Name: " << people[i].id << " Floor: " << people[i].floor << std::endl;
     }
@@ -59,7 +59,7 @@ void ElevatorBay::allocatePeople1(){ //This method allocates people for floors 1
     processPeople(e1);  //unsure about what this thing does exactly...
 }
 
-void ElevatorBay::processPeople(Elevator e){
+void ElevatorBay::processPeopleEfficient(Elevator e){
     int x = 0;
     std::vector <int> uniqueFloors;
     //std::cout<<"tmp's size: " << tmp.size() << std::endl;

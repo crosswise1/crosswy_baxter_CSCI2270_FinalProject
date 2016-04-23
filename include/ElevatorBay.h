@@ -20,7 +20,7 @@ struct Elevator{
     int capacity;
     Elevator(){
         floorsVisited = 0;
-        capacity = 8;
+        capacity = 15;
     }
 };
 
@@ -35,15 +35,18 @@ class ElevatorBay
         //void allocatePeople3();
         void printResults();
         int nextFloor();
-        void processPeople (Elevator);
+        void printInitialStats();
+
 
     protected:
     private:
         Elevator e1;
         Elevator e2;
         Elevator e3;
+        Elevator e4old;
         std::vector<Person> people;
-        void printInitial();
+        void processPeopleEfficient(Elevator);
+        void processPeopleEfficient();
 };
 
 #endif // ELEVATORBAY_H
