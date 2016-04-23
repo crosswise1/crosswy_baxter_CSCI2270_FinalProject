@@ -23,6 +23,7 @@ int main(int argc, char* argv[]){
     string choice = mainMenu();
     while(choice != "6"){
         if(choice == "1")
+            ElevatorBay.printInitialStats();
 
         else if(choice == "2"){
 

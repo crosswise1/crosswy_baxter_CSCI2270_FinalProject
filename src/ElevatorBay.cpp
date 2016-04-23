@@ -29,7 +29,7 @@ void ElevatorBay::readFile(std::string fname){
             Person newPerson(name, floor);
             people.push_back(newPerson);
         }
-        printInitial();
+        printInitialStats(); //added print initial stats
         allocatePeople1();
     }
 }
