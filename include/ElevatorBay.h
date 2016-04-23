@@ -30,12 +30,9 @@ class ElevatorBay
         ElevatorBay(std::string);
         ~ElevatorBay();
         void readFile(std::string);
-        void allocatePeople1();
-        //void allocatePeople2();
-        //void allocatePeople3();
         void printResults();
-        int nextFloor();
         void printInitialStats();
+
 
 
     protected:
@@ -43,10 +40,14 @@ class ElevatorBay
         Elevator e1;
         Elevator e2;
         Elevator e3;
-        Elevator e4old;
+        Elevator ie1;
+        Elevator ie2;
+        Elevator ie3;
         std::vector<Person> people;
+        void allocatePeopleEfficient();
+        void allocatePeopleInefficient();
         void processPeopleEfficient(Elevator);
-        void processPeopleEfficient();
+        void processPeopleInefficient(Elevator);
 };
 
 #endif // ELEVATORBAY_H
