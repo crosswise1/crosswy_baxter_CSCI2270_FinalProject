@@ -34,11 +34,34 @@ void ElevatorBay::readFile(std::string fname){
     }
 }
 
-void ElevatorBay::printInitialStats(){ //david comment: there has to be a more efficient way than this
+void ElevatorBay::printInitialStats(){ //david comment: i'm working to make the below more efficient
     std::cout << "Number of passengers to process: " << people.size() <<" people" << std::endl;
     std::cout << "=================================" << std::endl;
     std::cout << "FLOOR DISTRIBUTION" << std::endl;
+    int printPeopleArray[15];
+    int buildingHeight = 15;
+
+    for (int floor = 0; floor < buildingHeight; floor++){
+        int counter = 0;
+        for (unsigned int index = 0; index < people.size(); index++){
+            if (people[index].floor == floor+1)
+                counter++;
+        }
+        printPeopleArray[floor] = counter;
+        if (printPeopleArray[floor] < 9){
+            std::cout << "FLOOR 0" << floor+1<<":";
+            for (int x = 0; x < printPeopleArray[floor]; x++)
+                std::cout<<'x';
+        }
+        else
+            std::cout << "Floor " << floor+1 <<":";
+        std::cout<<std::endl;
+    }
+
+
+    /*
     int one = 0, two = 0, three = 0, four = 0, five = 0, six = 0, seven = 0, eight = 0, nine = 0, ten = 0, eleven = 0, twelve = 0, thirteen = 0, fourteen =0, fifteen = 0;
+
     for(unsigned int i = 0; i < people.size(); i++){
         if (people[i].floor == 1)
             one =  one + 1;
@@ -72,23 +95,6 @@ void ElevatorBay::printInitialStats(){ //david comment: there has to be a more e
             fifteen = fifteen + 1;
         //std::cout << "Name: " << people[i].id << " Floor: " << people[i].floor << std::endl;
     }
-    /*
-    std::cout<< one << std::endl;
-    std::cout<< two << std::endl;
-    std::cout<< three << std::endl;
-    std::cout<< four << std::endl;
-    std::cout<< five << std::endl;
-    std::cout<< six << std::endl;
-    std::cout<< seven << std::endl;
-    std::cout<< eight << std::endl;
-    std::cout<< nine << std::endl;
-    std::cout<< ten << std::endl;
-    std::cout<< eleven << std::endl;
-    std::cout<< twelve << std::endl;
-    std::cout<< thirteen << std::endl;
-    std::cout<< fourteen << std::endl;
-    std::cout<< fifteen << std::endl;
-    */
     std::cout << "FLOOR 01: ";
     for(int i = 0; i < one; i++)
         std::cout<<'x';
@@ -149,6 +155,7 @@ void ElevatorBay::printInitialStats(){ //david comment: there has to be a more e
     for(int i = 0; i < fifteen; i++)
         std::cout<<'x';
     std::cout<<std::endl;
+    */
 }
 
 void ElevatorBay::allocatePeopleEfficient(){ //This method allocates people for floors 1-5
