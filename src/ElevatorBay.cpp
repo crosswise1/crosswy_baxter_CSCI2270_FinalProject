@@ -29,133 +29,35 @@ void ElevatorBay::readFile(std::string fname){
             Person newPerson(name, floor);
             people.push_back(newPerson);
         }
-        //printInitialStats();
         allocatePeopleEfficient(); //changed allocatePeople1 to allocatePeopleEfficient
     }
 }
 
-void ElevatorBay::printInitialStats(){ //david comment: i'm working to make the below more efficient
+void ElevatorBay::printInitialStats(){
     std::cout << "Number of passengers to process: " << people.size() <<" people" << std::endl;
     std::cout << "=================================" << std::endl;
     std::cout << "FLOOR DISTRIBUTION" << std::endl;
     int printPeopleArray[15];
     int buildingHeight = 15;
-
     for (int floor = 0; floor < buildingHeight; floor++){
         int counter = 0;
         for (unsigned int index = 0; index < people.size(); index++){
             if (people[index].floor == floor+1)
                 counter++;
+            printPeopleArray[floor] = counter;
         }
-        printPeopleArray[floor] = counter;
-        if (printPeopleArray[floor] < 9){
-            std::cout << "FLOOR 0" << floor+1<<":";
+        if (floor < 9){
+            std::cout << "Floor 0" << floor+1<<":";
             for (int x = 0; x < printPeopleArray[floor]; x++)
                 std::cout<<'x';
         }
-        else
+        else{
             std::cout << "Floor " << floor+1 <<":";
+            for (int x = 0; x < printPeopleArray[floor]; x++)
+                std::cout<<'x';
+        }
         std::cout<<std::endl;
     }
-
-
-    /*
-    int one = 0, two = 0, three = 0, four = 0, five = 0, six = 0, seven = 0, eight = 0, nine = 0, ten = 0, eleven = 0, twelve = 0, thirteen = 0, fourteen =0, fifteen = 0;
-
-    for(unsigned int i = 0; i < people.size(); i++){
-        if (people[i].floor == 1)
-            one =  one + 1;
-        else if (people[i].floor == 2)
-            two = two + 1;
-        else if (people[i].floor == 3)
-            three = three + 1;
-        else if (people[i].floor == 4)
-            four = four + 1;
-        else if (people[i].floor == 5)
-            five = five + 1;
-        else if (people[i].floor == 6)
-            six = six + 1;
-        else if (people[i].floor == 7)
-            seven = seven + 1;
-        else if (people[i].floor == 8)
-            eight = eight + 1;
-        else if (people[i].floor == 9)
-            nine = nine + 1;
-        else if (people[i].floor == 10)
-            ten = ten + 1;
-        else if (people[i].floor == 11)
-            eleven = eleven + 1;
-        else if (people[i].floor == 12)
-            twelve = twelve + 1;
-        else if (people[i].floor == 13)
-            thirteen = thirteen + 1;
-        else if (people[i].floor == 14)
-            fourteen = fourteen + 1;
-        else if (people[i].floor == 15)
-            fifteen = fifteen + 1;
-        //std::cout << "Name: " << people[i].id << " Floor: " << people[i].floor << std::endl;
-    }
-    std::cout << "FLOOR 01: ";
-    for(int i = 0; i < one; i++)
-        std::cout<<'x';
-    std::cout<<std::endl;
-    std::cout << "FLOOR 02: ";
-    for(int i = 0; i < two; i++)
-        std::cout<<'x';
-    std::cout<<std::endl;
-    std::cout << "FLOOR 03: ";
-    for(int i = 0; i < three; i++)
-        std::cout<<'x';
-    std::cout<<std::endl;
-    std::cout << "FLOOR 04: ";
-    for(int i = 0; i < four; i++)
-        std::cout<<'x';
-    std::cout<<std::endl;
-    std::cout << "FLOOR 05: ";
-    for(int i = 0; i < five; i++)
-        std::cout<<'x';
-    std::cout<<std::endl;
-    std::cout << "FLOOR 06: ";
-    for(int i = 0; i < six; i++)
-        std::cout<<'x';
-    std::cout<<std::endl;
-    std::cout << "FLOOR 07: ";
-    for(int i = 0; i < seven; i++)
-        std::cout<<'x';
-    std::cout<<std::endl;
-    std::cout << "FLOOR 08: ";
-    for(int i = 0; i < eight; i++)
-        std::cout<<'x';
-    std::cout<<std::endl;
-    std::cout << "FLOOR 09: ";
-    for(int i = 0; i < nine; i++)
-        std::cout<<'x';
-    std::cout<<std::endl;
-    std::cout << "FLOOR 10: ";
-    for(int i = 0; i < ten; i++)
-        std::cout<<'x';
-    std::cout<<std::endl;
-    std::cout << "FLOOR 11: ";
-    for(int i = 0; i < eleven; i++)
-        std::cout<<'x';
-    std::cout<<std::endl;
-    std::cout << "FLOOR 12: ";
-    for(int i = 0; i < twelve; i++)
-        std::cout<<'x';
-    std::cout<<std::endl;
-    std::cout << "FLOOR 13: ";
-    for(int i = 0; i < thirteen; i++)
-        std::cout<<'x';
-    std::cout<<std::endl;
-    std::cout << "FLOOR 14: ";
-    for(int i = 0; i < fourteen; i++)
-        std::cout<<'x';
-    std::cout<<std::endl;
-    std::cout << "FLOOR 15: ";
-    for(int i = 0; i < fifteen; i++)
-        std::cout<<'x';
-    std::cout<<std::endl;
-    */
 }
 
 void ElevatorBay::allocatePeopleEfficient(){ //This method allocates people for floors 1-5
