@@ -33,7 +33,7 @@ void ElevatorBay::readFile(std::string fname){
     }
 }
 
-void ElevatorBay::printInitialStats(){
+void ElevatorBay::printInitialStats(){//new comment!!!!
     std::cout << "Number of passengers to process: " << people.size() <<" people" << std::endl;
     std::cout << "=================================" << std::endl;
     std::cout << "FLOOR DISTRIBUTION" << std::endl;
