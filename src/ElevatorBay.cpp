@@ -124,11 +124,3 @@ void ElevatorBay::allocatePeopleInefficient(){
     }
     processPeopleInefficient(ie1);
 }
-
-void ElevatorBay::processPeopleInefficient(Elevator e){ //I think we should be able to use the ProcessPeople method even for the inefficient version of things.
-    std::vector<int> uniqueFloors;
-
-    while(!e.passengers.empty()){
-
-    }
-}
