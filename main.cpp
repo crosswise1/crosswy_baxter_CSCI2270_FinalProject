@@ -25,10 +25,11 @@ int main(int argc, char* argv[]){
         if(choice == "1")
             eb.printInitialStats();
         else if(choice == "2"){
-
+            cout << "LETS GO!" << endl;
+            eb.runElevators("inefficient");
         }
         else if(choice == "3"){
-
+            eb.runElevators("efficient");
         }
         else if (choice == "4"){
 
