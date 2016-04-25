@@ -33,8 +33,6 @@ class ElevatorBay
         void printResults();
         void printInitialStats();
 
-
-
     protected:
     private:
         Elevator e1;

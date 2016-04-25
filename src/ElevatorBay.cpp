@@ -29,14 +29,34 @@ void ElevatorBay::readFile(std::string fname){
             Person newPerson(name, floor);
             people.push_back(newPerson);
         }
-        printInitialStats(); //added print initial stats
-        allocatePeople1();
+        allocatePeopleEfficient(); //changed allocatePeople1 to allocatePeopleEfficient
     }
 }
 
 void ElevatorBay::printInitialStats(){
-    for(unsigned int i = 0; i < people.size(); i++){
-        std::cout << "Name: " << people[i].id << " Floor: " << people[i].floor << std::endl;
+    std::cout << "Number of passengers to process: " << people.size() <<" people" << std::endl;
+    std::cout << "=================================" << std::endl;
+    std::cout << "FLOOR DISTRIBUTION" << std::endl;
+    int printPeopleArray[15];
+    int buildingHeight = 15;
+    for (int floor = 0; floor < buildingHeight; floor++){
+        int counter = 0;
+        for (unsigned int index = 0; index < people.size(); index++){
+            if (people[index].floor == floor+1)
+                counter++;
+            printPeopleArray[floor] = counter;
+        }
+        if (floor < 9){
+            std::cout << "Floor 0" << floor+1<<":";
+            for (int x = 0; x < printPeopleArray[floor]; x++)
+                std::cout<<'x';
+        }
+        else{
+            std::cout << "Floor " << floor+1 <<":";
+            for (int x = 0; x < printPeopleArray[floor]; x++)
+                std::cout<<'x';
+        }
+        std::cout<<std::endl;
     }
 }
 
@@ -56,7 +76,7 @@ void ElevatorBay::allocatePeopleEfficient(){ //This method allocates people for 
     }
     //Do we need to add a condition if queue is not empty?
     std::cout<<"test" << std::endl;
-    processPeople(e1);  //unsure about what this thing does exactly...
+    processPeopleEfficient(e1);  //unsure about what this thing does exactly...
 }
 
 void ElevatorBay::processPeopleEfficient(Elevator e){
@@ -96,18 +116,16 @@ void ElevatorBay::processPeopleEfficient(Elevator e){
         e.floorsVisited++;
         //new comment
     std::cout<<"floors visited: "<< e.floorsVisited << std::endl;
-
 }
 
-
 void ElevatorBay::allocatePeopleInefficient(){
-    for(int i = 0; i < people.size(); i++){
+    for(unsigned int i = 0; i < people.size(); i++){
         ie1.passengers.push(people[i]);
     }
     processPeopleInefficient(ie1);
 }
 
-void ElevatorBay::processPeopleInefficient(Elevator e){
+void ElevatorBay::processPeopleInefficient(Elevator e){ //I think we should be able to use the ProcessPeople method even for the inefficient version of things.
     std::vector<int> uniqueFloors;
 
     while(!e.passengers.empty()){
