@@ -146,26 +146,23 @@ void ElevatorBay::processPeople(Elevator *e){
 }
 
 void ElevatorBay::processPeopleFloors(Elevator *e){
-    std::cout << "in process people floors " << std::endl;
     int peopleFloors[buildingHeight]; //needs to be linked to the floors in the building
     int numPassengers = 0;
-    int floorWeightsPerTrip = 0;
     for (int x = 0; x < buildingHeight; x++)
         peopleFloors[x] = 0;
     while (!e->passengers.empty()){
-        std::cout << "WHILE LOOP" << std::endl;
+        //std::cout << "WHILE LOOP" << std::endl;
         int floor = e->passengers.front().floor;
         peopleFloors[floor] = peopleFloors[floor] + 1;
         e->passengers.pop();
         numPassengers++;
         int counter1 = 1;
-        floorWeightsPerTrip = 0;
         if(numPassengers == e->capacity){
             for (int y = 0; y < 16; y++){
                 if (peopleFloors[y] > 0){
-                    floorWeightsPerTrip = floorWeightsPerTrip + ((counter1) * peopleFloors[y]);
+                    e->totalPeopleFloors += ((counter1) * peopleFloors[y]);
                     counter1++;
-                    std::cout << "Floor weights: " << floorWeightsPerTrip << std::endl;
+                    //std::cout << "Floor weights: " << floorWeightsPerTrip << std::endl;
                 }
             }
             numPassengers = 0;
@@ -173,7 +170,6 @@ void ElevatorBay::processPeopleFloors(Elevator *e){
                 peopleFloors[x] = 0;
         }
     }
-    e->totalPeopleFloors = e->totalPeopleFloors + floorWeightsPerTrip;
 }
 
 
@@ -258,8 +254,8 @@ void ElevatorBay::printResults(){
 
 void ElevatorBay::printAverage(){
     if(inefficientProcessed && efficientProcessed){
-        int iSum = ie1->totalPeopleFloors;
-        int eSum = e1->totalPeopleFloors + e2->totalPeopleFloors + e3->totalPeopleFloors;
+        double iSum = ie1->totalPeopleFloors;
+        double eSum = e1->totalPeopleFloors + e2->totalPeopleFloors + e3->totalPeopleFloors;
         std::cout << iSum << " and "<<eSum << std::endl;
         std::cout << "The average number of floors visited by each passenger for each case is:" << std::endl;
         std::cout << "Efficient Elevators: " << eSum/people.size() << std::endl;
