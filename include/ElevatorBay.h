@@ -36,7 +36,6 @@ class ElevatorBay
         void printResults();
         void printInitialStats();
         void printAverage();
-        void reset();
         void init();
 
     protected:
@@ -47,7 +46,6 @@ class ElevatorBay
         Elevator *ie1;
         bool inefficientProcessed;
         bool efficientProcessed;
-
         std::vector<Person> people;
         int printPeopleArray[15];
         int buildingHeight = 15;
