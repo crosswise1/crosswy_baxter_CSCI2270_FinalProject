@@ -164,7 +164,6 @@ void ElevatorBay::processPeople(Elevator *e, int num){
 
 }
 
-
 void ElevatorBay::runElevators(std::string option){
     if(option == "efficient" && !efficientProcessed){
         std::cout << "Running the efficient elevators. . . ";
@@ -195,6 +194,8 @@ void ElevatorBay::printResults(){
         std::cout << "With the same data, the inefficient elevator accessed a total of " << std::endl;
         std::cout << ie1->floorsVisited << " unique floors, while the efficient elevators accessed a total of " << std::endl;
         std::cout << e1->floorsVisited+e2->floorsVisited+e3->floorsVisited << " unique floors." << std::endl;
+        std::cout << std::endl;
+        std::cout << "Running the same number of people efficient elevators visited " << ie1->floorsVisited - (e1->floorsVisited+e2->floorsVisited+e3->floorsVisited) << " fewer floors" << std::endl;
     }
     else if(inefficientProcessed && !efficientProcessed){
         std::cout << "Uh oh! It appears you haven't run the efficient elevators." << std::endl;
