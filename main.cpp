@@ -1,6 +1,6 @@
 #include "include/ElevatorBay.h"
 #include <iostream>
-
+#include <fstream>
 using namespace std;
 
 string selection;
@@ -12,23 +12,25 @@ string mainMenu(){
     cout << "3. Run efficient elevators" << endl;
     cout << "4. Compare elevator weights" << endl;
     cout << "5. Average length of trip per passenger" << endl;
-    cout << "6. Quit" << endl;
+    cout << "6. Reset program" << endl;
+    cout << "7. Quit" << endl;
     getline(cin, selection);
     return selection;
 }
 
 int main(int argc, char* argv[]){
-    string fname = argv[1];
-    ElevatorBay eb(fname);
+    string fname;
+    ElevatorBay eb;
+    eb.init();
     string choice = mainMenu();
-    while(choice != "6"){
+    while(choice != "7"){
         if(choice == "1")
             eb.printInitialStats();
         else if(choice == "2"){
             eb.runElevators("inefficient");
         }
         else if(choice == "3"){
-            cout << "Time to go" << endl;   
+            cout << "Time to go" << endl;
             eb.runElevators("efficient");
         }
         else if (choice == "4"){
@@ -38,7 +40,7 @@ int main(int argc, char* argv[]){
 
         }
         else if (choice == "6"){
-
+            eb.init();
         }
         choice = mainMenu();
     }

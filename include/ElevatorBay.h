@@ -7,6 +7,7 @@
 struct Person{
     std::string id;
     int floor;
+    int floorsVisited;
     Person(){};
     Person(std::string _id, int _floor){
         id = _id;
@@ -27,14 +28,15 @@ struct Elevator{
 class ElevatorBay
 {
     public:
-        ElevatorBay(std::string);
+        ElevatorBay();
         ~ElevatorBay();
         void readFile(std::string);
         void runElevators(std::string);
         void printResults();
         void printInitialStats();
         void printAverage();
-
+        void reset();
+        void init();
     protected:
     private:
         Elevator *e1;

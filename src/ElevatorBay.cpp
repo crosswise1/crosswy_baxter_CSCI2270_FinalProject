@@ -7,7 +7,28 @@
 #include<string>
 
 
-ElevatorBay::ElevatorBay(std::string fname){
+ElevatorBay::ElevatorBay(){
+    //nothing
+}
+ElevatorBay::~ElevatorBay(){
+    //nothing
+}
+
+void ElevatorBay::init(){
+    std::cout << std::string(50, '\n');
+    std::string fname;
+    std::cout << "Welcome to the Elevator Optimization program." << std::endl;
+    std::cout << "To continue, enter the name of the text file containing the passenger information: " << std::endl;
+    getline(std::cin, fname);
+    std::ifstream inFile;
+    inFile.open(fname);
+    while(!inFile.good()){
+        std::cout << "File not found! Please try again: " << std::endl;
+        getline(std::cin, fname);
+        inFile.open(fname);
+    }
+
+    people.clear();
     readFile(fname);
     inefficientProcessed = false;
     efficientProcessed = false;
@@ -16,9 +37,9 @@ ElevatorBay::ElevatorBay(std::string fname){
     e3 = new Elevator;
     ie1 = new Elevator;
 }
-ElevatorBay::~ElevatorBay(){
-    //nothing
-}
+
+
+
 void ElevatorBay::readFile(std::string fname){
     std::ifstream inFile;
     inFile.open(fname);
@@ -135,6 +156,7 @@ void ElevatorBay::processPeople(Elevator *e, int num){
             uniqueFloors.clear();
             e->floorsVisited++;
         }
+
     }
     if (numPassengers != 0)
         e->floorsVisited++;
