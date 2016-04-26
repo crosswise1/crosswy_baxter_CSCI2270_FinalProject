@@ -19,6 +19,7 @@ struct Elevator{
     std::queue<Person> passengers;
     int floorsVisited;
     int capacity;
+    int totalPeopleFloors;
     Elevator(){
         floorsVisited = 0;
         capacity = 15;
