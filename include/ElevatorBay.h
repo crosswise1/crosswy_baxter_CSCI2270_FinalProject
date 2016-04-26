@@ -30,22 +30,26 @@ class ElevatorBay
         ElevatorBay(std::string);
         ~ElevatorBay();
         void readFile(std::string);
+        void runElevators(std::string);
         void printResults();
         void printInitialStats();
+        void printAverage();
 
     protected:
     private:
-        Elevator e1;
-        Elevator e2;
-        Elevator e3;
-        Elevator ie1;
-        Elevator ie2;
-        Elevator ie3;
+        Elevator *e1;
+        Elevator *e2;
+        Elevator *e3;
+        Elevator *ie1;
+        bool inefficientProcessed;
+        bool efficientProcessed;
+
         std::vector<Person> people;
+        int printPeopleArray[15];
+        int buildingHeight = 15;
         void allocatePeopleEfficient();
         void allocatePeopleInefficient();
-        void processPeopleEfficient(Elevator);
-        void processPeopleInefficient(Elevator);
+        void processPeople(Elevator*, int);
 };
 
 #endif // ELEVATORBAY_H
