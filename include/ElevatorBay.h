@@ -35,7 +35,6 @@ class ElevatorBay
         void printResults();
         void printInitialStats();
         void printAverage();
-        void reset();
         void init();
     protected:
     private:
