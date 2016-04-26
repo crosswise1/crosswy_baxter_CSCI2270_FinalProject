@@ -122,30 +122,20 @@ void ElevatorBay::allocatePeopleInefficient(){
 void ElevatorBay::processPeople(Elevator *e, int num){
     int numPassengers = 0;
     std::vector <int> uniqueFloors;
-    //std::cout << "About to enter loop" << std::endl;
-    //std::cout<<"tmp's size: " << tmp.size() << std::endl;
-
-    //std::cout << "Found something" << std::endl;
     while (!e->passengers.empty()){
-        //std::cout << e.passengers.front().id << std::endl;
         int floor = e->passengers.front().floor;
-        //std::cout <<"Floor number: " << floor << std::endl;
         bool found = false;
         if (!uniqueFloors.empty()){
             for (unsigned int j  = 0; j <= uniqueFloors.size(); j++){
-                //std::cout<<"what is J = " << j << std::endl;
                 if (uniqueFloors[j] == floor) {
                     found = true;
                     break;
                 }
             }
         }
-        //std::cout<<"5 test" << std::endl;
         if(!found) {
             uniqueFloors.push_back(floor);
-            //std::cout<<"5 test" << std::endl;
             e->floorsVisited++;
-            //std::cout<<"6 test" << std::endl;
         }
         e->passengers.pop();
         numPassengers++;
@@ -154,15 +144,44 @@ void ElevatorBay::processPeople(Elevator *e, int num){
             uniqueFloors.clear();
             e->floorsVisited++;
         }
-
     }
     if (numPassengers != 0)
         e->floorsVisited++;
-        //new comment
-    //std::cout<<"floors visited: "<< e.floorsVisited << std::endl;
-
-
 }
+
+/*
+void ElevatorBay::processPeopleFloors(Elevator *e, int num){
+    int numPassengers = 0;
+    std::vector <int> uniqueFloors;
+    int peopleFloors[15];
+    while (!e->passengers.empty()){
+        int floor = e->passengers.front().floor;
+        peopleFloors[floor] = peopleFloors[floor] + 1;
+        bool found = false;
+        if (!uniqueFloors.empty()){
+            for (unsigned int j  = 0; j <= uniqueFloors.size(); j++){
+                if (uniqueFloors[j] == floor) {
+                    found = true;
+                    break;
+                }
+            }
+        }
+        if(!found) {
+            uniqueFloors.push_back(floor);
+            e->floorsVisited++;
+        }
+        e->passengers.pop();
+        numPassengers++;
+        if (numPassengers == e->capacity){
+            numPassengers = 0;
+            uniqueFloors.clear();
+            e->floorsVisited++;
+        }
+    }
+    if (numPassengers != 0)
+        e->floorsVisited++;
+}
+*/
 
 void ElevatorBay::runElevators(std::string option){
     if(option == "efficient" && !efficientProcessed){
