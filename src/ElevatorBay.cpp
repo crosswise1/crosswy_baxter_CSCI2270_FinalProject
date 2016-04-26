@@ -153,8 +153,8 @@ void ElevatorBay::processPeople(Elevator *e){
 }
 
 void ElevatorBay::processPeopleFloors(Elevator *e){
-    int peopleFloors[capacity];
-    for (int x = 0; x < capacity; x++)
+    int peopleFloors[buildingHeight];
+    for (int x = 0; x < buildingHeight; x++)
         peopleFloors[x] = 0;
     while (!e->passengers.empty()){
         int floor = e->passengers.front().floor;
@@ -163,9 +163,8 @@ void ElevatorBay::processPeopleFloors(Elevator *e){
     }
     int counter = 1;
     int floorWeightsPerTrip = 0;
-    int counter = 1;
     for (int y = 0; y < 16; y++){
-        cout<<"Floor "<< y <<" contains: " <<peopleFloors[y]<< "people" << endl;
+        std::cout<<"Floor "<< y <<" contains: " <<peopleFloors[y]<< "people" << std::endl;
         if (peopleFloors[y] > 0){
             floorWeightsPerTrip = floorWeightsPerTrip + ((counter) * peopleFloors[y]);
             //cout <<"Total People: " << floorWeightsPerTrip<<endl;
