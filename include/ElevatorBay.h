@@ -23,6 +23,7 @@ struct Elevator{
     Elevator(){
         floorsVisited = 0;
         capacity = 15;
+        totalPeopleFloors = 0;
     }
 };
 

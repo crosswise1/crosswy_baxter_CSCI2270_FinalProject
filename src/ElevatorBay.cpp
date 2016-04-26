@@ -106,19 +106,12 @@ void ElevatorBay::allocatePeopleEfficient(){ //This method allocates people for 
     }
     //Do we need to add a condition if queue is not empty?
     //std::cout<<"test" << std::endl;
-    processPeople(e1);
-    processPeopleFloors(e1);
-    processPeople(e2);
-    processPeopleFloors(e2);
-    processPeople(e3);
-    processPeopleFloors(e3);
 }
 
 void ElevatorBay::allocatePeopleInefficient(){
     for(unsigned int i = 0; i < people.size(); i++){
         ie1->passengers.push(people[i]);
     }
-    processPeople(ie1);
 }
 
 
@@ -153,20 +146,31 @@ void ElevatorBay::processPeople(Elevator *e){
 }
 
 void ElevatorBay::processPeopleFloors(Elevator *e){
+    std::cout << "in process people floors " << std::endl;
     int peopleFloors[buildingHeight]; //needs to be linked to the floors in the building
+    int numPassengers = 0;
+    int floorWeightsPerTrip = 0;
     for (int x = 0; x < buildingHeight; x++)
         peopleFloors[x] = 0;
     while (!e->passengers.empty()){
+        std::cout << "WHILE LOOP" << std::endl;
         int floor = e->passengers.front().floor;
         peopleFloors[floor] = peopleFloors[floor] + 1;
         e->passengers.pop();
-    }
-    int counter1 = 1;
-    int floorWeightsPerTrip = 0;
-    for (int y = 0; y < 16; y++){
-        if (peopleFloors[y] > 0){
-            floorWeightsPerTrip = floorWeightsPerTrip + ((counter1) * peopleFloors[y]);
-            counter1++;
+        numPassengers++;
+        int counter1 = 1;
+        floorWeightsPerTrip = 0;
+        if(numPassengers == e->capacity){
+            for (int y = 0; y < 16; y++){
+                if (peopleFloors[y] > 0){
+                    floorWeightsPerTrip = floorWeightsPerTrip + ((counter1) * peopleFloors[y]);
+                    counter1++;
+                    std::cout << "Floor weights: " << floorWeightsPerTrip << std::endl;
+                }
+            }
+            numPassengers = 0;
+            for (int x = 0; x < buildingHeight; x++)
+                peopleFloors[x] = 0;
         }
     }
     e->totalPeopleFloors = e->totalPeopleFloors + floorWeightsPerTrip;
@@ -177,6 +181,14 @@ void ElevatorBay::runElevators(std::string option){
     if(option == "efficient" && !efficientProcessed){
         std::cout << "Running the efficient elevators. . . ";
         allocatePeopleEfficient();
+        processPeople(e1);
+        processPeople(e2);
+        processPeople(e3);
+        allocatePeopleEfficient();
+        processPeopleFloors(e1);
+        processPeopleFloors(e2);
+        processPeopleFloors(e3);
+
         efficientProcessed = true;
         std::cout << ". . . complete! Results are now available for the efficient elevators." << std::endl;
         if(inefficientProcessed)
@@ -186,6 +198,9 @@ void ElevatorBay::runElevators(std::string option){
     else if(option == "inefficient" && !inefficientProcessed){
         std::cout << "Running the inefficient elevator. . . ";
         allocatePeopleInefficient();
+        processPeople(ie1);
+        allocatePeopleInefficient();
+        processPeopleFloors(ie1);
         inefficientProcessed = true;
         std::cout << ". . . complete! Results are now available for the inefficient elevator." << std::endl;
         if(efficientProcessed)
@@ -211,7 +226,7 @@ void ElevatorBay::printResults(){
         std::cout << "Would you like to process those now? y/n" << std::endl;
         getline(std::cin, decision);
         if(decision == "y")
-            allocatePeopleEfficient();
+            runElevators("efficient");
             efficientProcessed = true;
         std::cout << "Ready to go! Printing results. . ." << std::endl;
         printResults();
@@ -221,7 +236,7 @@ void ElevatorBay::printResults(){
         std::cout << "Would you like to process that now? y/n" << std::endl;
         getline(std::cin, decision);
         if(decision == "y")
-            allocatePeopleInefficient();
+            runElevators("inefficient");
             inefficientProcessed = true;
         std::cout << "Ready to go! Printing results. . ." << std::endl;
         printResults();
@@ -231,14 +246,24 @@ void ElevatorBay::printResults(){
         std::cout << "Would you like to process those now? y/n" << std::endl;
         getline(std::cin, decision);
         if(decision == "y"){
-            allocatePeopleInefficient();
-            allocatePeopleEfficient();
+            runElevators("efficient");
+            runElevators("inefficient");
             efficientProcessed = true;
             inefficientProcessed = true;
         }
         std::cout << "Ready to go! Printing results. . ." << std::endl;
         printResults();
     }
+}
 
+void ElevatorBay::printAverage(){
+    if(inefficientProcessed && efficientProcessed){
+        int iSum = ie1->totalPeopleFloors;
+        int eSum = e1->totalPeopleFloors + e2->totalPeopleFloors + e3->totalPeopleFloors;
+        std::cout << iSum << " and "<<eSum << std::endl;
+        std::cout << "The average number of floors visited by each passenger for each case is:" << std::endl;
+        std::cout << "Efficient Elevators: " << eSum/people.size() << std::endl;
+        std::cout << "Inefficient Elevator: " << iSum/people.size() << std::endl;
+    }
 
 }
