@@ -106,9 +106,12 @@ void ElevatorBay::allocatePeopleEfficient(){ //This method allocates people for 
     }
     //Do we need to add a condition if queue is not empty?
     //std::cout<<"test" << std::endl;
-    processPeople(e1, 1);
-    processPeople(e2, 2);
-    processPeople(e3, 3);
+    processPeople(e1);
+    processPeopleFloors(e1);
+    processPeople(e2);
+    processPeopleFloors(e2);
+    processPeople(e3);
+    processPeopleFloors(e3);
 }
 
 void ElevatorBay::allocatePeopleInefficient(){
@@ -119,7 +122,7 @@ void ElevatorBay::allocatePeopleInefficient(){
 }
 
 
-void ElevatorBay::processPeople(Elevator *e, int num){
+void ElevatorBay::processPeople(Elevator *e){
     int numPassengers = 0;
     std::vector <int> uniqueFloors;
     while (!e->passengers.empty()){
@@ -149,39 +152,30 @@ void ElevatorBay::processPeople(Elevator *e, int num){
         e->floorsVisited++;
 }
 
-/*
-void ElevatorBay::processPeopleFloors(Elevator *e, int num){
-    int numPassengers = 0;
-    std::vector <int> uniqueFloors;
-    int peopleFloors[15];
+void ElevatorBay::processPeopleFloors(Elevator *e){
+    int peopleFloors[capacity];
+    for (int x = 0; x < capacity; x++)
+        peopleFloors[x] = 0;
     while (!e->passengers.empty()){
         int floor = e->passengers.front().floor;
         peopleFloors[floor] = peopleFloors[floor] + 1;
-        bool found = false;
-        if (!uniqueFloors.empty()){
-            for (unsigned int j  = 0; j <= uniqueFloors.size(); j++){
-                if (uniqueFloors[j] == floor) {
-                    found = true;
-                    break;
-                }
-            }
-        }
-        if(!found) {
-            uniqueFloors.push_back(floor);
-            e->floorsVisited++;
-        }
         e->passengers.pop();
-        numPassengers++;
-        if (numPassengers == e->capacity){
-            numPassengers = 0;
-            uniqueFloors.clear();
-            e->floorsVisited++;
+    }
+    int counter = 1;
+    int floorWeightsPerTrip = 0;
+    int counter = 1;
+    for (int y = 0; y < 16; y++){
+        cout<<"Floor "<< y <<" contains: " <<peopleFloors[y]<< "people" << endl;
+        if (peopleFloors[y] > 0){
+            floorWeightsPerTrip = floorWeightsPerTrip + ((counter) * peopleFloors[y]);
+            //cout <<"Total People: " << floorWeightsPerTrip<<endl;
+            //cout << "Counter: " << counter << endl;
+            counter++;
         }
     }
-    if (numPassengers != 0)
-        e->floorsVisited++;
+    e->totalPeopleFloors = e->totalPeopleFloors + floorWeightsPerTrip;
 }
-*/
+
 
 void ElevatorBay::runElevators(std::string option){
     if(option == "efficient" && !efficientProcessed){

@@ -38,6 +38,7 @@ class ElevatorBay
         void printAverage();
         void reset();
         void init();
+
     protected:
     private:
         Elevator *e1;
@@ -52,7 +53,8 @@ class ElevatorBay
         int buildingHeight = 15;
         void allocatePeopleEfficient();
         void allocatePeopleInefficient();
-        void processPeople(Elevator*, int);
+        void processPeople(Elevator*);
+        void processPeopleFloors(Elevator*)
 };
 
 #endif // ELEVATORBAY_H
