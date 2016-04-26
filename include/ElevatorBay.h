@@ -54,7 +54,7 @@ class ElevatorBay
         void allocatePeopleEfficient();
         void allocatePeopleInefficient();
         void processPeople(Elevator*);
-        void processPeopleFloors(Elevator*)
+        void processPeopleFloors(Elevator*);
 };
 
 #endif // ELEVATORBAY_H

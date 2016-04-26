@@ -118,7 +118,7 @@ void ElevatorBay::allocatePeopleInefficient(){
     for(unsigned int i = 0; i < people.size(); i++){
         ie1->passengers.push(people[i]);
     }
-    processPeople(ie1, 4);
+    processPeople(ie1);
 }
 
 
@@ -153,24 +153,20 @@ void ElevatorBay::processPeople(Elevator *e){
 }
 
 void ElevatorBay::processPeopleFloors(Elevator *e){
-    int peopleFloors[capacity];
-    for (int x = 0; x < capacity; x++)
+    int peopleFloors[15]; //needs to be linked to the floors in the building
+    for (int x = 0; x < buildingHeight; x++)
         peopleFloors[x] = 0;
     while (!e->passengers.empty()){
         int floor = e->passengers.front().floor;
         peopleFloors[floor] = peopleFloors[floor] + 1;
         e->passengers.pop();
     }
-    int counter = 1;
+    int counter1 = 1;
     int floorWeightsPerTrip = 0;
-    int counter = 1;
     for (int y = 0; y < 16; y++){
-        cout<<"Floor "<< y <<" contains: " <<peopleFloors[y]<< "people" << endl;
         if (peopleFloors[y] > 0){
-            floorWeightsPerTrip = floorWeightsPerTrip + ((counter) * peopleFloors[y]);
-            //cout <<"Total People: " << floorWeightsPerTrip<<endl;
-            //cout << "Counter: " << counter << endl;
-            counter++;
+            floorWeightsPerTrip = floorWeightsPerTrip + ((counter1) * peopleFloors[y]);
+            counter1++;
         }
     }
     e->totalPeopleFloors = e->totalPeopleFloors + floorWeightsPerTrip;
