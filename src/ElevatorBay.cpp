@@ -57,7 +57,7 @@ void ElevatorBay::readFile(std::string fname){
             people.push_back(newPerson);
         }
     }
-    std::cout << "Built" << std::endl;
+    std::cout << "Program built!" << std::endl;
 }
 
 void ElevatorBay::printInitialStats(){//new comment!!!!
@@ -90,24 +90,23 @@ void ElevatorBay::printInitialStats(){//new comment!!!!
 void ElevatorBay::allocatePeopleEfficient(){ //This method allocates people for floors 1-5
     std::cout << "================" << std::endl; //this is just error checking
     for (unsigned int i = 0; i < people.size(); i++){
-        std::cout << "LOOp" << std::endl;
         if (people[i].floor >= 1 && people[i].floor <= 5){
-            std::cout << "Name:: " << people[i].id <<", Floor: " << people[i].floor << std::endl;
+        //    std::cout << "Name:: " << people[i].id <<", Floor: " << people[i].floor << std::endl;
             e1->passengers.push(people[i]);
         }
         else if(people[i].floor >= 6 && people[i].floor <= 10){
-            std::cout << "Name:: " << people[i].id <<", Floor: " << people[i].floor << std::endl;
+        //    std::cout << "Name:: " << people[i].id <<", Floor: " << people[i].floor << std::endl;
 
             e2->passengers.push(people[i]);
         }
         else if(people[i].floor >= 11 && people[i].floor <= 15){
-            std::cout << "Name:: " << people[i].id <<", Floor: " << people[i].floor << std::endl;
+        //    std::cout << "Name:: " << people[i].id <<", Floor: " << people[i].floor << std::endl;
 
             e3->passengers.push(people[i]);
         }
     }
     //Do we need to add a condition if queue is not empty?
-    std::cout<<"test" << std::endl;
+    //std::cout<<"test" << std::endl;
     processPeople(e1, 1);
     processPeople(e2, 2);
     processPeople(e3, 3);
@@ -188,7 +187,41 @@ void ElevatorBay::runElevators(std::string option){
 }
 
 void ElevatorBay::printResults(){
-    std::cout << "With the same data, the inefficient elevator accessed a total of " << std::endl;
-    std::cout << ie1->floorsVisited << " unique floors, while the efficient elevators accessed a total of " << std::endl;
-    std::cout << e1->floorsVisited+e2->floorsVisited+e3->floorsVisited << " unique floors." << std::endl;
+    std::string decision;
+    if(inefficientProcessed && efficientProcessed){
+        std::cout << "With the same data, the inefficient elevator accessed a total of " << std::endl;
+        std::cout << ie1->floorsVisited << " unique floors, while the efficient elevators accessed a total of " << std::endl;
+        std::cout << e1->floorsVisited+e2->floorsVisited+e3->floorsVisited << " unique floors." << std::endl;
+    }
+    else if(inefficientProcessed && !efficientProcessed){
+        std::cout << "Uh oh! It appears you haven't run the efficient elevators." << std::endl;
+        std::cout << "Would you like to process those now? y/n" << std::endl;
+        getline(std::cin, decision);
+        if(decision == "y")
+            allocatePeopleEfficient();
+        std::cout << "Ready to go! Printing results . . ." << std::endl;
+        printResults();
+    }
+    else if(!inefficientProcessed && efficientProcessed){
+        std::cout << "Uh oh! It appears you haven't run the inefficient elevator." << std::endl;
+        std::cout << "Would you like to process that now? y/n" << std::endl;
+        getline(std::cin, decision);
+        if(decision == "y")
+            allocatePeopleInefficient();
+        std::cout << "Ready to go! Printing results. . ." << std::endl;
+        printResults();
+    }
+    else{
+        std::cout << "Uh oh! It appears you haven't run the inefficient elevator OR the efficient elevators.." << std::endl;
+        std::cout << "Would you like to process those now? y/n" << std::endl;
+        getline(std::cin, decision);
+        if(decision == "y"){
+            allocatePeopleInefficient();
+            allocatePeopleEfficient();
+        }
+        std::cout << "Ready to go! Printing results. . ." << std::endl;
+        printResults();
+    }
+
+
 }
