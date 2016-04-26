@@ -19,6 +19,7 @@ struct Elevator{
     std::queue<Person> passengers;
     int floorsVisited;
     int capacity;
+    int totalPeopleFloors;
     Elevator(){
         floorsVisited = 0;
         capacity = 15;
@@ -36,6 +37,7 @@ class ElevatorBay
         void printInitialStats();
         void printAverage();
         void init();
+
     protected:
     private:
         Elevator *e1;
@@ -50,7 +52,8 @@ class ElevatorBay
         int buildingHeight = 15;
         void allocatePeopleEfficient();
         void allocatePeopleInefficient();
-        void processPeople(Elevator*, int);
+        void processPeople(Elevator*);
+        void processPeopleFloors(Elevator*)
 };
 
 #endif // ELEVATORBAY_H
