@@ -46,7 +46,6 @@ class ElevatorBay
         Elevator *ie1;
         bool inefficientProcessed;
         bool efficientProcessed;
-
         std::vector<Person> people;
         int printPeopleArray[15];
         int buildingHeight = 15;
