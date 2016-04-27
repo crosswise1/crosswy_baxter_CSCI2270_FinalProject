@@ -68,10 +68,9 @@ void ElevatorBay::printInitialStats(){//new comment!!!!
         int counter = 0;
         for (unsigned int index = 0; index < people.size(); index++){
             if (people[index].floor == floor+1)
-                counter++;
-            printPeopleArray[floor] = counter;
+                printPeopleArray[floor]++;
         }
-        if (floor < 9){
+        /*if (floor < 9){
             std::cout << "Floor 0" << floor+1<<":";
             for (int x = 0; x < printPeopleArray[floor]; x++)
                 std::cout<<'x';
@@ -80,7 +79,12 @@ void ElevatorBay::printInitialStats(){//new comment!!!!
             std::cout << "Floor " << floor+1 <<":";
             for (int x = 0; x < printPeopleArray[floor]; x++)
                 std::cout<<'x';
-        }
+        }*/
+        std::cout << "Floor ";
+        std::cout << setw(2) << setfill('0') << floor+1;
+        std::cout << ":";
+        for (int x = 0; x < printPeopleArray[floor]; x++)
+            std::cout<<'x';
         std::cout<<std::endl;
     }
     std::cout<<"... where a single passenger is represented by an x"<<std::endl;
@@ -157,6 +161,8 @@ void ElevatorBay::processPeopleFloors(Elevator *e){
         e->passengers.pop();
         numPassengers++;
         int counter1 = 1;
+        std::cout << "Floor: " << floor << std::endl;
+        std::cout << "Number of Passengers: " << peopleFloors[floor] << std::endl;
         if(numPassengers == e->capacity){
             for (int y = 0; y < 16; y++){
                 if (peopleFloors[y] > 0){
