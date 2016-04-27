@@ -5,7 +5,7 @@
 #include<fstream>
 #include<sstream>
 #include<string>
-
+#include<iomanip>
 
 ElevatorBay::ElevatorBay(){
     //nothing
@@ -65,14 +65,13 @@ void ElevatorBay::printInitialStats(){//new comment!!!!
     std::cout << "=================================" << std::endl;
     std::cout << "FLOOR DISTRIBUTION" << std::endl;
     for (int floor = 0; floor < buildingHeight; floor++){
-        int counter = 0;
         for (unsigned int index = 0; index < people.size(); index++){
             if (people[index].floor == floor+1)
                 printPeopleArray[floor]++;
         }
-        
+
         std::cout << "Floor ";
-        std::cout << setw(2) << setfill('0') << floor+1;
+        std::cout << std::setw(2) << std::setfill('0') << floor+1;
         std::cout << ":";
         for (int x = 0; x < printPeopleArray[floor]; x++)
             std::cout<<'x';
