@@ -70,16 +70,7 @@ void ElevatorBay::printInitialStats(){//new comment!!!!
             if (people[index].floor == floor+1)
                 printPeopleArray[floor]++;
         }
-        /*if (floor < 9){
-            std::cout << "Floor 0" << floor+1<<":";
-            for (int x = 0; x < printPeopleArray[floor]; x++)
-                std::cout<<'x';
-        }
-        else{
-            std::cout << "Floor " << floor+1 <<":";
-            for (int x = 0; x < printPeopleArray[floor]; x++)
-                std::cout<<'x';
-        }*/
+        
         std::cout << "Floor ";
         std::cout << setw(2) << setfill('0') << floor+1;
         std::cout << ":";
