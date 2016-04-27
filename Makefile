@@ -1,6 +1,6 @@
 OBJS = ElevatorBay.o main.o
 CPPFLAGS = -Wall -std=c++11
-PROG = ele
+PROG = elevator
 CC = g++
 
 $(PROG): $(OBJS)
