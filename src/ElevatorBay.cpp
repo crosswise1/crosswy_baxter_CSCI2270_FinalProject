@@ -64,7 +64,7 @@ void ElevatorBay::printInitialStats(){//new comment!!!!
     std::cout << "Number of passengers to process: " << people.size() <<" people" << std::endl;
     std::cout << "=================================" << std::endl;
     std::cout << "FLOOR DISTRIBUTION" << std::endl;
-    for (int floor = 0; floor < buildingHeight; floor++){
+    /*for (int floor = 0; floor < buildingHeight; floor++){
         for (unsigned int index = 0; index < people.size(); index++){
             if (people[index].floor == floor+1)
                 printPeopleArray[floor]++;
@@ -76,7 +76,27 @@ void ElevatorBay::printInitialStats(){//new comment!!!!
         for (int x = 0; x < printPeopleArray[floor]; x++)
             std::cout<<'x';
         std::cout<<std::endl;
+    }*/
+    for (int floor = 0; floor < buildingHeight; floor++){
+        int counter = 0;
+        for (unsigned int index = 0; index < people.size(); index++){
+            if (people[index].floor == floor+1)
+                counter++;
+            printPeopleArray[floor] = counter;
+        }
+        if (floor < 9){
+            std::cout << "Floor 0" << floor+1<<":";
+            for (int x = 0; x < printPeopleArray[floor]; x++)
+                std::cout<<'x';
+        }
+        else{
+            std::cout << "Floor " << floor+1 <<":";
+            for (int x = 0; x < printPeopleArray[floor]; x++)
+                std::cout<<'x';
+        }
+        std::cout<<std::endl;
     }
+
     std::cout<<"... where a single passenger is represented by an x"<<std::endl;
 
 }
@@ -142,6 +162,7 @@ void ElevatorBay::processPeople(Elevator *e){
 void ElevatorBay::processPeopleFloors(Elevator *e){
     int peopleFloors[buildingHeight]; //needs to be linked to the floors in the building
     int numPassengers = 0;
+    int counter1 = 1;
     for (int x = 0; x < buildingHeight; x++)
         peopleFloors[x] = 0;
     while (!e->passengers.empty()){
@@ -150,9 +171,7 @@ void ElevatorBay::processPeopleFloors(Elevator *e){
         peopleFloors[floor] = peopleFloors[floor] + 1;
         e->passengers.pop();
         numPassengers++;
-        int counter1 = 1;
-        std::cout << "Floor: " << floor << std::endl;
-        std::cout << "Number of Passengers: " << peopleFloors[floor] << std::endl;
+        counter1 = 1;
         if(numPassengers == e->capacity){
             for (int y = 0; y < 16; y++){
                 if (peopleFloors[y] > 0){
@@ -164,6 +183,14 @@ void ElevatorBay::processPeopleFloors(Elevator *e){
             numPassengers = 0;
             for (int x = 0; x < buildingHeight; x++)
                 peopleFloors[x] = 0;
+        }
+    }
+    counter1 = 1;
+    for (int y = 0; y < 16; y++){
+        if (peopleFloors[y] > 0){
+            e->totalPeopleFloors += ((counter1) * peopleFloors[y]);
+            counter1++;
+            //std::cout << "Floor weights: " << floorWeightsPerTrip << std::endl;
         }
     }
 }
@@ -180,7 +207,6 @@ void ElevatorBay::runElevators(std::string option){
         processPeopleFloors(e1);
         processPeopleFloors(e2);
         processPeopleFloors(e3);
-
         efficientProcessed = true;
         std::cout << ". . . complete! Results are now available for the efficient elevators." << std::endl;
         if(inefficientProcessed)
@@ -252,10 +278,12 @@ void ElevatorBay::printAverage(){
     if(inefficientProcessed && efficientProcessed){
         double iSum = ie1->totalPeopleFloors;
         double eSum = e1->totalPeopleFloors + e2->totalPeopleFloors + e3->totalPeopleFloors;
-        std::cout << iSum << " and "<<eSum << std::endl;
         std::cout << "The average number of floors visited by each passenger for each case is:" << std::endl;
         std::cout << "Efficient Elevators: " << eSum/people.size() << std::endl;
         std::cout << "Inefficient Elevator: " << iSum/people.size() << std::endl;
+    }
+    else{
+        std::cout << "Results not available. Please process the elevators." << std::endl;
     }
 
 }
