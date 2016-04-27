@@ -3,7 +3,7 @@
 #include<vector>
 #include<queue>
 #include<iostream>
-
+//Structs
 struct Person{
     std::string id;
     int floor;
@@ -26,7 +26,7 @@ struct Elevator{
         totalPeopleFloors = 0;
     }
 };
-
+//ElevatorBay header
 class ElevatorBay
 {
     public:
