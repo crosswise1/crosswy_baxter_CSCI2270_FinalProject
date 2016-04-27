@@ -25,7 +25,7 @@ David Crosswy and Landon Baxter
 None!  
 
 # Open issues/Bugs  
-See the "Issues" tab above  
+[Here is one](https://github.com/crosswise1/crosswy_baxter_CSCI2270_FinalProject/issues/2)   
 
 # Overview of Methods  
 
