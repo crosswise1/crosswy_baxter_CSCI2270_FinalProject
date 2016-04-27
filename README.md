@@ -20,7 +20,7 @@ For this program to operate, we created 10 methods inside the ElevatorBay class:
 1) Download ZIP   
 2) Extract files into directory of your choice   
 3) Type "make" into the terminal while in the correct directory.   
-4) The "ele" executable should be created. To start the program, simply enter "./ele" into the console.   
+4) The "elevator" executable should be created. To start the program, simply enter "./elevator" into the terminal.   
 5) Enter people1.txt as the filename when prompted.    
 
 You may reset the program whenever you wish in order to test a custom .txt file. When using a different file, make sure to follow the same structure as people1.txt.     
