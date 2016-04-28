@@ -208,6 +208,7 @@ void ElevatorBay::runElevators(std::string option){
         processPeopleFloors(e2);
         processPeopleFloors(e3);
         efficientProcessed = true;
+        //std::cout << e1->floorsVisited+e2->floorsVisited+e3->floorsVisited << std::endl;
         std::cout << ". . . complete! Results are now available for the efficient elevators." << std::endl;
         if(inefficientProcessed)
             std::cout << "You can now compare the floors visited by each system! Returning to main menu." << std::endl;
@@ -219,6 +220,7 @@ void ElevatorBay::runElevators(std::string option){
         processPeople(ie1);
         allocatePeopleInefficient();
         processPeopleFloors(ie1);
+        //std::cout << ie1->floorsVisited << std::endl;
         inefficientProcessed = true;
         std::cout << ". . . complete! Results are now available for the inefficient elevator." << std::endl;
         if(efficientProcessed)
@@ -243,21 +245,30 @@ void ElevatorBay::printResults(){
         std::cout << "Uh oh! It appears you haven't run the efficient elevators." << std::endl;
         std::cout << "Would you like to process those now? y/n" << std::endl;
         getline(std::cin, decision);
-        if(decision == "y")
+        if(decision == "y"){
             runElevators("efficient");
             efficientProcessed = true;
-        std::cout << "Ready to go! Printing results. . ." << std::endl;
-        printResults();
+            std::cout << "Ready to go! Printing results. . ." << std::endl;
+            printResults();
+        }
+        else{
+            std::cout << "No problem! Run the elevators when ready." << std::endl;
+        }
     }
     else if(!inefficientProcessed && efficientProcessed){
         std::cout << "Uh oh! It appears you haven't run the inefficient elevator." << std::endl;
         std::cout << "Would you like to process that now? y/n" << std::endl;
         getline(std::cin, decision);
-        if(decision == "y")
+        if(decision == "y"){
             runElevators("inefficient");
             inefficientProcessed = true;
-        std::cout << "Ready to go! Printing results. . ." << std::endl;
-        printResults();
+            std::cout << "Ready to go! Printing results. . ." << std::endl;
+            printResults();
+        }
+        else{
+            std::cout << "No problem! Run the elevators when ready." << std::endl;
+        }
+
     }
     else{
         std::cout << "Uh oh! It appears you haven't run the inefficient elevator OR the efficient elevators.." << std::endl;
@@ -265,12 +276,12 @@ void ElevatorBay::printResults(){
         getline(std::cin, decision);
         if(decision == "y"){
             runElevators("efficient");
-            runElevators("inefficient");
             efficientProcessed = true;
+            runElevators("inefficient");
             inefficientProcessed = true;
+            std::cout << "Ready to go! Printing results. . ." << std::endl;
+            printResults();
         }
-        std::cout << "Ready to go! Printing results. . ." << std::endl;
-        printResults();
     }
 }
 
